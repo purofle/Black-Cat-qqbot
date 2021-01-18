@@ -33,3 +33,6 @@ async def coolapk(
             msg.append(Image.fromNetworkAddress(i))
 
         await app.sendGroupMessage(group, MessageChain.create(msg))
+
+print("酷安模块导入完成")
+
