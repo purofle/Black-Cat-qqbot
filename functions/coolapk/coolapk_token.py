@@ -12,16 +12,16 @@ def get_app_token():
     t = int(time.time())
     hex_t = hex(t)
 
-    # 时间戳加密
+    # 把时间戳md5
     md5_t = hashlib.md5(str(t).encode('utf-8')).hexdigest()
 
-    # 不知道什么鬼字符串拼接
+    # 把固定的死token拼接上时间戳的md5跟deviceid
     a = 'token://com.coolapk.market/c67ef5943784d09750dcfbb31020f0ab?{}${}&com.coolapk.market' \
         .format(md5_t, DEVICE_ID)
 
-    # 不知道什么鬼字符串拼接 后的字符串再次加密
+    # 把拼接好的活token用base64解码一次再md5一次
     md5_a = hashlib.md5(base64.b64encode(a.encode('utf-8'))).hexdigest()
-
+    # 活token的md5+deviceid+hex的时间戳就是最后的X-App-Token
     token = '{}{}{}'.format(md5_a, DEVICE_ID, hex_t)
     return token
 
