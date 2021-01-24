@@ -26,7 +26,7 @@ async def tr(
                 # 不 加 参 数 是 坏 文 明
                 At(member.id),
                 Plain(" 找不到参数！\n请使用\"翻译 文本 语言代码\"使用此功能！\n语言代码参考："),
-                Image.fromLocalFile("src/fanyi.jpg")
+                Image.fromLocalFile("functions/res/fanyi.jpg")
                 ]))
         else:
             msg_sp = msg.split(" ")
