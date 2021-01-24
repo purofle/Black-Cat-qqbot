@@ -18,7 +18,7 @@ class Fanyi:
         self.__appid = appid
         self.__autoKey = authKey
         self.__salt = random.randint(-10000,100000)
-        self.__sign: str = self.__appid+self.__q+str(self.__salt)+self.__autoKey
+        self.__sign: str = str(self.__appid)+str(self.__q)+str(self.__salt)+self.__autoKey
         __md5 = md5()
         __md5.update(self.__sign.encode(encoding="utf-8"))
         self.__sign = __md5.hexdigest()
