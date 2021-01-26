@@ -1,16 +1,5 @@
 import yaml
 
-def save(path: str):
-    key = {
-            "fanyi": {
-                "appid": "12345678",
-                "authKey": "shssksks"
-                }
-            }
-    with open(path,"w") as f:
-        f.write(yaml.dump(key))
-
-
 def read(path: str):
     with open(path, "r") as f:
         n = f.read()

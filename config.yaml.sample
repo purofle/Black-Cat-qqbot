@@ -1,3 +1,6 @@
 fanyi:
   appid: 12345678
-  authKey: sksjj
+  authKey: wjjwjajsjsjs
+functions:
+  coolapk: True
+  translation: True
