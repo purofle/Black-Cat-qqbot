@@ -8,6 +8,16 @@
 一个简单的QQ机器人。
 </div>
 
+## 使用 
+```bash
+git clone https://github.com/purofle/Black-Cat-qqbot.git
+cd Black-Cat-qqbot
+cp config.yaml.sample config.yaml
+# 修改你的config.yaml,配置key
+# 修改apps/__init__.py,配置host,qq,websocket,authKey
+./main.py
+```
+
 ## 感谢
 - [ZCKun/CoolapkTokenCrack](https://github.com/ZCKun/CoolapkTokenCrack)提供的X-App-Token算法
 ## 许可证
