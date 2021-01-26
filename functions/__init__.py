@@ -1,12 +1,19 @@
-print("导入翻译模块")
+from functions.keys.key import read
+
+read = read("config.yaml")["functions"]
+
+if read["translation"]:
+    print("导入翻译模块")
+    import functions.translation
+
+if read["coolapk"]:
+    print("导入酷安模块")
+    import functions.coolapk
+
 from graia.application import GraiaMiraiApplication
 from graia.application.group import Group, Member
 from graia.application.message.chain import MessageChain
 from graia.application.message.elements.internal import At, Plain
-import functions.translation
-print("导入酷安模块")
-import functions.coolapk
-
 from apps import bcc
 from graia.application.entry import GroupMessage
 
