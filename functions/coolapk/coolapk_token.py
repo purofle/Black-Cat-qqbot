@@ -26,7 +26,7 @@ def get_app_token():
     return token
 
 
-async def request(url: str) -> dict:
+async def request(url: str) -> list:
     headers = {
         "User-Agent": "Dalvik/2.1.0 (Linux; U; Android 10; HLK-AL00 Build/HONORHLK-AL00) (#Build; HONOR; HLK-AL00; HLK-AL00 10.1.0.110(C00E105R6P2); 10) +CoolMarket/11.0-beta9-2101041",
         "X-App-Id": "com.coolapk.market",
@@ -42,4 +42,5 @@ async def request(url: str) -> dict:
         "X-App-Token": get_app_token(),
     }
     async with aiohttp.request("GET", url,headers=headers) as r:
-        return await r.json()
+        __r = await r.json()
+    return __r["data"]
