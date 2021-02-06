@@ -16,6 +16,7 @@ async def gmsg(
         member: Member,
         message: MessageChain
         ):
+
     if message.asDisplay() == "功能列表":
         await app.sendGroupMessage(
                 group, MessageChain.create([
@@ -34,5 +35,3 @@ if read["translation"]:
 if read["coolapk"]:
     print("导入酷安模块")
     import functions.coolapk
-
-
