@@ -1,6 +1,10 @@
 fanyi:
-  appid: 12345678
-  authKey: wjjwjajsjsjs
+  appid: 12346678
+  authKey: sixjjdhshdhd
 functions:
   coolapk: True
   translation: True
+  voice: True
+voice:
+  location: southeastasia
+  key: abzisnddidjjdsjsjssjsjs
