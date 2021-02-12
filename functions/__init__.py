@@ -35,3 +35,7 @@ if read["translation"]:
 if read["coolapk"]:
     print("导入酷安模块")
     import functions.coolapk
+
+if read["voice"]:
+    print("导入语音模块")
+    import functions.voice
