@@ -1,7 +1,8 @@
+import json
 from graia.application import GraiaMiraiApplication
 from graia.application.group import Group, Member
 from graia.application.message.chain import MessageChain
-from graia.application.message.elements.internal import Plain
+from graia.application.message.elements.internal import At, Plain, Voice
 from apps import bcc
 from graia.application.entry import GroupMessage
 from functions.voice.api import AzureAPI
@@ -17,9 +18,59 @@ async def voice(
         member: Member
         ):
     if message.asDisplay().startswith("语音列表"):
-        azure = AzureAPI(read["location"], read["key"])
-        text = await azure.get_voice_list()
-        n = []
-        for i in text[-23:]:
-            n.append(i["LocalName"])
-        await app.sendGroupMessage(group, MessageChain.create([Plain(str(n))]))
+
+        with open("functions/res/speaker.json", "r") as f:
+            n = json.loads(f.read())
+
+        await app.sendGroupMessage(group, MessageChain.create([
+            At(member.id),
+            Plain(" 发音人列表如下：{}".format(str(list(n.keys()))))]))
+
+
+@bcc.receiver(GroupMessage)
+async def voice(
+        app: GraiaMiraiApplication,
+        group: Group,
+        message: MessageChain,
+        member: Member
+        ):
+    message_raw = message.asDisplay()
+    if message_raw[:2] == "草草":
+        sp_m = message_raw.split(" ")
+        with open("functions/res/speaker.json","r") as f:
+            n = json.loads(f.read()) # 加载数据
+
+        if not sp_m[1] in n.keys():
+            await app.sendGroupMessage(
+                    group, MessageChain.create([
+                        At(member.id),
+                        Plain(" 发音人选择错误！")]))
+            return
+
+        elif len(message.asDisplay()) > 50:
+            await app.sendGroupMessage(
+                    group, MessageChain.create([
+                        At(member.id),
+                        Plain(" 字数过多！")]))
+            return
+
+        if len(sp_m) < 3:
+            await app.sendGroupMessage(
+                    group, MessageChain.create([
+                        At(member.id),
+                        Plain(" 请按照格式发送！格式如下：\n草草 发音人 文本")]))
+            return
+
+        else:
+            await app.sendGroupMessage(group, MessageChain.create([Plain("请稍后")]))
+            text = message.asDisplay()[4+len(sp_m[1]):]
+            # text为文本，sp_m[1]为发音人
+            azure = AzureAPI(read["location"], read["key"])
+            voice = await azure.get_speech(text, n[sp_m[1]])
+            print(str(voice))
+            # 上传
+            voice = await app.uploadVoice(voice)
+            await app.sendGroupMessage(group,
+                    MessageChain.create([
+                        voice
+                        ]))
