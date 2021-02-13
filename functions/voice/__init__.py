@@ -66,11 +66,12 @@ async def voice(
             text = message.asDisplay()[4+len(sp_m[1]):]
             # text为文本，sp_m[1]为发音人
             azure = AzureAPI(read["location"], read["key"])
-            voice = await azure.get_speech(text, n[sp_m[1]])
-            print(str(voice))
+            voice_raw = await azure.get_speech(text, n[sp_m[1]])
             # 上传
-            voice = await app.uploadVoice(voice)
+            voice = await app.uploadVoice(voice_raw)
             await app.sendGroupMessage(group,
                     MessageChain.create([
                         voice
                         ]))
+            with open("functions/res/test.mp3","wb") as f:
+                f.write(voice_raw)
