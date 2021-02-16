@@ -19,6 +19,7 @@ cp config.yaml.sample config.yaml
 ```
 
 ## 感谢
-- [ZCKun/CoolapkTokenCrack](https://github.com/ZCKun/CoolapkTokenCrack)提供的X-App-Token算法
+- [ZCKun/CoolapkTokenCrack](https://github.com/ZCKun/CoolapkTokenCrack)提供的X-App-Token算法 
+- [mamoe/mirai](https://github.com/mamoe/mirai)提供的QQ协议
 ## 许可证
 [GPLv3](LICENSE)
