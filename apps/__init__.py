@@ -1,6 +1,5 @@
 import asyncio
-from graia.application.entry import GraiaMiraiApplication
-from graia.application.session import Session
+from graia.application import Session, GraiaMiraiApplication
 from graia.broadcast import Broadcast
 
 loop = asyncio.get_event_loop()
