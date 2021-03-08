@@ -138,3 +138,5 @@ music/
 *.list
 
 .idea
+
+test.*
