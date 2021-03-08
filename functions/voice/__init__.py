@@ -1,4 +1,6 @@
+import asyncio
 import json
+import os
 from graia.application import GraiaMiraiApplication
 from graia.application.group import Group, Member
 from graia.application.message.chain import MessageChain
@@ -68,10 +70,14 @@ async def voice(
             azure = AzureAPI(read["location"], read["key"])
             voice_raw = await azure.get_speech(text, n[sp_m[1]])
             # 上传
-            voice = await app.uploadVoice(voice_raw)
-            await app.sendGroupMessage(group,
-                    MessageChain.create([
-                        voice
-                        ]))
             with open("functions/res/test.mp3","wb") as f:
                 f.write(voice_raw)
+
+            os.system("rm functions/res/test.pcm;ffmpeg -i functions/res/test.mp3 -f s16be -ar 16000 functions/res/test.pcm")
+            os.system("encoder functions/res/test.pcm functions/res/test.silk -tencent -Fs_API 16000")
+            voice = await app.uploadVoice(open("functions/res/test.silk","rb").read())
+
+            await app.sendGroupMessage(group,MessageChain.create([
+                voice
+                ]))
+

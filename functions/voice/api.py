@@ -19,7 +19,7 @@ class AzureAPI:
         headers = {
                 "Ocp-Apim-Subscription-Key": self.__key,
                 "Content-Type": "application/ssml+xml",
-                "X-Microsoft-OutputFormat": "audio-16khz-128kbitrate-mono-mp3",
+                "X-Microsoft-OutputFormat": "audio-16khz-64kbitrate-mono-mp3",
                 "User-Agent": "curl"
                 }
 
