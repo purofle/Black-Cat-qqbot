@@ -1,13 +1,20 @@
+import random
+
 from graia.application import GraiaMiraiApplication
+from graia.application.entry import GroupMessage
 from graia.application.group import Group, Member
 from graia.application.message.chain import MessageChain
 from graia.application.message.elements.internal import At, Image, Plain
-from functions.coolapk.coolapk_token import request
-import random
-from apps import bcc
-from graia.application.entry import GroupMessage
+from graia.saya import Channel, Saya
+from graia.saya.builtins.broadcast.schema import ListenerSchema
+from graia.saya.event import SayaModuleInstalled
 
-@bcc.receiver(GroupMessage)
+from functions.coolapk.coolapk_token import request
+
+saya = Saya.current()
+channel = Channel.current()
+
+@channel.use(ListenerSchema(listening_events=[GroupMessage]))
 async def coolapk(
         app: GraiaMiraiApplication,
         message: MessageChain,
@@ -40,4 +47,8 @@ async def coolapk(
 
         await app.sendGroupMessage(group, MessageChain.create(msg))
 
-print("酷安模块导入完成")
+@channel.use(ListenerSchema(
+        listening_events=[SayaModuleInstalled]
+        ))
+async def module_listener(event: SayaModuleInstalled):
+        print(f"{event.module}::模块加载成功!!!")
