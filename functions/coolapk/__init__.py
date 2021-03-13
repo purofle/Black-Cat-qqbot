@@ -46,9 +46,3 @@ async def coolapk(
                 ]
 
         await app.sendGroupMessage(group, MessageChain.create(msg))
-
-@channel.use(ListenerSchema(
-        listening_events=[SayaModuleInstalled]
-        ))
-async def module_listener(event: SayaModuleInstalled):
-        print(f"{event.module}::模块加载成功!!!")

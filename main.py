@@ -28,6 +28,7 @@ app = GraiaMiraiApplication(
 
 with saya.module_context():
     saya.require("functions.coolapk")
+    saya.require("functions.translation")
 
 try:
     app.launch_blocking()

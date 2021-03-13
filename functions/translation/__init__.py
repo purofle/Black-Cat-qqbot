@@ -1,18 +1,23 @@
 from graia.application import GraiaMiraiApplication
+from graia.application.entry import GroupMessage
 from graia.application.group import Group, Member
 from graia.application.message.chain import MessageChain
 from graia.application.message.elements.internal import At, Image, Plain
-from apps import app
-from apps import bcc
+from graia.saya import Channel, Saya
+from graia.saya.builtins.broadcast.schema import ListenerSchema
+from graia.saya.event import SayaModuleInstalled
 
-from graia.application.entry import GroupMessage
-from functions.translation.fanyi import Fanyi
 from functions.keys.key import read
+from functions.translation.fanyi import Fanyi
 
 appid = read("config.yaml")["fanyi"]["appid"]
 authKey = read("config.yaml")["fanyi"]["authKey"]
 
-@bcc.receiver(GroupMessage)
+
+saya = Saya.current()
+channel = Channel.current()
+
+@channel.use(ListenerSchema(listening_events=[GroupMessage]))
 async def tr(
         app: GraiaMiraiApplication,
         group: Group,
@@ -36,5 +41,3 @@ async def tr(
                 At(member.id),
                 Plain(" "+lang_to)
                 ]))
-
-print("翻译模块加载完成")
