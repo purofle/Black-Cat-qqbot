@@ -44,5 +44,5 @@ async def coolapk(
     tag = choice_dict["tags"]
     device = choice_dict["device_title"]
 
-    msg = [At(member.id),Plain("用户名：{}\n使用设备：{}\n标签：{}".format(username, device, tag)),Image.fromNetworkAddress(url)]
+    msg = [At(member.id),Plain(" 用户名：{}\n使用设备：{}\n标签：{}".format(username, device, tag)),Image.fromNetworkAddress(url)]
     await app.sendGroupMessage(group, MessageChain.create(msg))
