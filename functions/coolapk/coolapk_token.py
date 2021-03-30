@@ -8,21 +8,23 @@ import base64
 
 DEVICE_ID = "8513efac-09ea-3709-b214-95b366f1a185"
 
+
 def get_app_token():
     t = int(time.time())
     hex_t = hex(t)
 
     # 把时间戳md5
-    md5_t = hashlib.md5(str(t).encode('utf-8')).hexdigest()
+    md5_t = hashlib.md5(str(t).encode("utf-8")).hexdigest()
 
     # 把固定的死token拼接上时间戳的md5跟deviceid
-    a = 'token://com.coolapk.market/c67ef5943784d09750dcfbb31020f0ab?{}${}&com.coolapk.market' \
-        .format(md5_t, DEVICE_ID)
+    a = "token://com.coolapk.market/c67ef5943784d09750dcfbb31020f0ab?{}${}&com.coolapk.market".format(
+        md5_t, DEVICE_ID
+    )
 
     # 把拼接好的活token用base64解码一次再md5一次
-    md5_a = hashlib.md5(base64.b64encode(a.encode('utf-8'))).hexdigest()
+    md5_a = hashlib.md5(base64.b64encode(a.encode("utf-8"))).hexdigest()
     # 活token的md5+deviceid+hex的时间戳就是最后的X-App-Token
-    token = '{}{}{}'.format(md5_a, DEVICE_ID, hex_t)
+    token = "{}{}{}".format(md5_a, DEVICE_ID, hex_t)
     return token
 
 
@@ -41,6 +43,6 @@ async def request(url: str) -> list:
         "X-Dark-Mode": "0",
         "X-App-Token": get_app_token(),
     }
-    async with aiohttp.request("GET", url,headers=headers) as r:
+    async with aiohttp.request("GET", url, headers=headers) as r:
         __r = await r.json()
     return __r["data"]
