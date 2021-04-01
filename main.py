@@ -31,6 +31,7 @@ with saya.module_context():
     saya.require("functions.coolapk")
     saya.require("functions.translation")
     saya.require("functions.voice")
+    saya.require("functions.ysck")
 
 try:
     app.launch_blocking()

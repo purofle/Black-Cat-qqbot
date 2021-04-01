@@ -1,3 +1,4 @@
+import asyncio
 import aiohttp
 
 
@@ -19,7 +20,9 @@ class Ysck:
         # 查询最大size.
         async with aiohttp.request("GET", self.__baseurl) as r:
             __r = await r.json()
-        return int(__r["data"]["size"])
+        if __r["retcode"] == -101:
+            raise (RuntimeError(__r))
+        return __r["data"]["size"]
 
     async def request(self, gacha_type: int) -> dict:
         """
@@ -38,4 +41,4 @@ class Ysck:
         async with aiohttp.request("GET", __url) as r:
             n = await r.json()
 
-        return n
+        return n["data"]
