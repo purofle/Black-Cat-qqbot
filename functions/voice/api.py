@@ -26,7 +26,7 @@ class AzureAPI:
         headers = {
             "Ocp-Apim-Subscription-Key": self.__key,
             "Content-Type": "application/ssml+xml",
-            "X-Microsoft-OutputFormat": "audio-16khz-64kbitrate-mono-mp3",
+            "X-Microsoft-OutputFormat": "audio-48khz-96kbitrate-mono-mp3",
             "User-Agent": "curl",
         }
 
@@ -39,5 +39,4 @@ class AzureAPI:
         )
         async with aiohttp.request("POST", url, data=data_raw, headers=headers) as r:
             n = await r.read()
-            print(r.status)
             return n
