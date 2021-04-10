@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import asyncio
+
 from graia.broadcast import Broadcast
 from graia.saya import Saya
 from graia.saya.builtins.broadcast import BroadcastBehaviour
@@ -12,7 +13,8 @@ saya = Saya(bcc)
 saya.install_behaviours(BroadcastBehaviour(bcc))
 
 import asyncio
-from graia.application import Session, GraiaMiraiApplication
+
+from graia.application import GraiaMiraiApplication, Session
 from graia.broadcast import Broadcast
 
 loop = asyncio.get_event_loop()
