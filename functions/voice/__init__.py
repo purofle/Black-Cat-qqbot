@@ -8,6 +8,7 @@ from graia.application.message.elements.internal import At, Plain
 from graia.saya import Saya
 from graia.saya.builtins.broadcast.behaviour import ListenerSchema
 from graia.saya.channel import Channel
+from pathlib import Path
 from graiax import silkcoder
 
 from .api import AzureAPI
@@ -80,8 +81,8 @@ async def voice(
             text = message.asDisplay()[4 + len(sp_m[1]) :]
             # text为文本，sp_m[1]为发音人
             voice_raw = await azure.get_speech(text, n[sp_m[1]])
+            open("a.mp3","wb").write(voice_raw)
             # 转码
-            open("voice.mp3", "wb").write(voice_raw)
-            await silkcoder.encode("voice.mp3", "voice.silk")
-            voice = await app.uploadVoice(open("voice.silk", "rb").read())
+            silk: bytes = await silkcoder.encode(voice_raw)
+            voice = await app.uploadVoice(silk)
             await app.sendGroupMessage(group, MessageChain.create([voice]))
