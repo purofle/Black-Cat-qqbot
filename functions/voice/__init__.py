@@ -39,7 +39,7 @@ async def speech_list(
             group,
             MessageChain.create(
                 [At(member.id), Plain(" 发音人列表如下：{}".format(
-                    await azure.get_voice_list()
+                    read_c["speech"]
                     ))]
             ),
         )
@@ -52,10 +52,8 @@ async def voice(
     message_raw = message.asDisplay()
     if message_raw[:2] == "语音":
         sp_m = message_raw.split(" ")
-        with open("functions/res/speaker.json", "r") as f:
-            n = json.loads(f.read())  # 加载数据
 
-        if not sp_m[1] in n.keys():
+        if not sp_m[1] in read_c["speech"].keys():
             await app.sendGroupMessage(
                 group, MessageChain.create([At(member.id), Plain(" 发音人选择错误！")])
             )
@@ -78,10 +76,9 @@ async def voice(
 
         else:
             await app.sendGroupMessage(group, MessageChain.create([Plain("请稍后")]))
-            text = message.asDisplay()[4 + len(sp_m[1]) :]
+            text = message.asDisplay()[4 + len(sp_m[1]):]
             # text为文本，sp_m[1]为发音人
             voice_raw = await azure.get_speech(text, n[sp_m[1]])
-            open("a.mp3","wb").write(voice_raw)
             # 转码
             silk: bytes = await silkcoder.encode(voice_raw)
             voice = await app.uploadVoice(silk)
