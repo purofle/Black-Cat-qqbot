@@ -69,7 +69,7 @@ async def voice(
             await app.sendGroupMessage(
                 group,
                 MessageChain.create(
-                    [At(member.id), Plain(" 请按照格式发送！格式如下：\n草草 发音人 文本")]
+                    [At(member.id), Plain(" 请按照格式发送！格式如下：\n语音 发音人 文本")]
                 ),
             )
             return
