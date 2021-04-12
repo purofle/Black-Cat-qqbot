@@ -141,3 +141,5 @@ music/
 
 test.*
 voice.*
+
+functions/voice/config.py
