@@ -50,7 +50,7 @@ async def voice(
     app: GraiaMiraiApplication, group: Group, message: MessageChain, member: Member
 ):
     message_raw = message.asDisplay()
-    if message_raw[:2] == "语音":
+    if message_raw[:2] == "语音" and len(message_raw) > 4:
         sp_m = message_raw.split(" ")
 
         if not sp_m[1] in read_c["speech"].keys():
@@ -76,9 +76,9 @@ async def voice(
 
         else:
             await app.sendGroupMessage(group, MessageChain.create([Plain("请稍后")]))
-            text = message.asDisplay()[4 + len(sp_m[1]):]
+            text = "".join(sp_m[-2:])
             # text为文本，sp_m[1]为发音人
-            voice_raw = await azure.get_speech(text, n[sp_m[1]])
+            voice_raw = await azure.get_speech(text, str([sp_m[1]]))
             # 转码
             silk: bytes = await silkcoder.encode(voice_raw)
             voice = await app.uploadVoice(silk)

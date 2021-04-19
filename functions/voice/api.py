@@ -39,4 +39,5 @@ class AzureAPI:
         )
         async with aiohttp.request("POST", url, data=data_raw, headers=headers) as r:
             n = await r.read()
+            print(n)
             return n

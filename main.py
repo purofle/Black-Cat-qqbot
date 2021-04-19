@@ -2,9 +2,13 @@
 
 import asyncio
 
-from graia.broadcast import Broadcast
 from graia.saya import Saya
 from graia.saya.builtins.broadcast import BroadcastBehaviour
+
+from graia.application import GraiaMiraiApplication, Session
+from graia.broadcast import Broadcast
+
+from utils.utils import get_all_package_name
 
 loop = asyncio.get_event_loop()
 bcc = Broadcast(loop=loop)
@@ -12,12 +16,7 @@ saya = Saya(bcc)
 
 saya.install_behaviours(BroadcastBehaviour(bcc))
 
-import asyncio
-
-from graia.application import GraiaMiraiApplication, Session
-from graia.broadcast import Broadcast
-
-loop = asyncio.get_event_loop()
+oop = asyncio.get_event_loop()
 
 app = GraiaMiraiApplication(
     broadcast=bcc,
@@ -30,10 +29,8 @@ app = GraiaMiraiApplication(
 )
 
 with saya.module_context():
-    saya.require("functions.coolapk")
-    saya.require("functions.translation")
-    saya.require("functions.voice")
-    saya.require("functions.ysck")
+    for i in get_all_package_name("functions/"):
+        saya.require("functions.{}".format(i))
 
 try:
     app.launch_blocking()
