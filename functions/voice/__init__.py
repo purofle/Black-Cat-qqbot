@@ -14,7 +14,7 @@ from graiax import silkcoder
 from .api import AzureAPI
 from .config import read_c
 
-__name__ = "voice"
+__sayamname__ = "voice"
 __description__ = "合成语音"
 __author__ = "purofle"
 __usage__ = "在群内发送 语音 发音人 内容 即可,发音人可通过 语音列表 获取."
@@ -22,7 +22,7 @@ __usage__ = "在群内发送 语音 发音人 内容 即可,发音人可通过 �
 saya = Saya.current()
 channel = Channel.current()
 
-channel.name(__name__)
+channel.name(__sayamname__)
 channel.author(__author__)
 channel.description(f"{__description__}\n使用方法：{__usage__}")
 
@@ -79,5 +79,5 @@ async def voice(
         voice_raw = await azure.get_speech(text, str([sp_m[1]]))
         # 转码
         silk: bytes = await silkcoder.encode(voice_raw)
-        voice = await app.uploadVoice(silk)
-        await app.sendGroupMessage(group, MessageChain.create([voice]))
+        voice_m = await app.uploadVoice(silk)
+        await app.sendGroupMessage(group, MessageChain.create([voice_m]))

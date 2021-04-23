@@ -12,7 +12,7 @@ from graia.saya.builtins.broadcast.schema import ListenerSchema
 
 from .coolapk_token import request
 
-__name__ = "coolapk"
+__sayamname__ = "coolapk"
 __description__ = "获取酷安酷图"
 __author__ = "purofle"
 __usage__ = "在群内发送 酷图 即可"
@@ -20,7 +20,7 @@ __usage__ = "在群内发送 酷图 即可"
 saya = Saya.current()
 channel = Channel.current()
 
-channel.name(__name__)
+channel.name(__sayamname__)
 channel.author(__author__)
 channel.description(f"{__description__}\n使用方法：{__usage__}")
 
@@ -32,7 +32,6 @@ channel.description(f"{__description__}\n使用方法：{__usage__}")
     )
 )
 async def coolapk(app: GraiaMiraiApplication, group: Group, member: Member):
-    await app.sendNudge(member, group)
     await app.sendGroupMessage(
         group, MessageChain.create([At(member.id), Plain(" 图片发送较慢，请稍等...")])
     )
