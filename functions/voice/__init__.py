@@ -59,7 +59,7 @@ async def voice(
             )
             return
 
-        elif len(message.asDisplay()) > 200:
+        if len(message.asDisplay()) > 200:
             await app.sendGroupMessage(
                 group, MessageChain.create([At(member.id), Plain(" 字数过多！")])
             )
@@ -73,13 +73,11 @@ async def voice(
                 ),
             )
             return
-
-        else:
-            await app.sendGroupMessage(group, MessageChain.create([Plain("请稍后")]))
-            text = "".join(sp_m[-2:])
-            # text为文本，sp_m[1]为发音人
-            voice_raw = await azure.get_speech(text, str([sp_m[1]]))
-            # 转码
-            silk: bytes = await silkcoder.encode(voice_raw)
-            voice = await app.uploadVoice(silk)
-            await app.sendGroupMessage(group, MessageChain.create([voice]))
+        await app.sendGroupMessage(group, MessageChain.create([Plain("请稍后")]))
+        text = "".join(sp_m[-2:])
+        # text为文本，sp_m[1]为发音人
+        voice_raw = await azure.get_speech(text, str([sp_m[1]]))
+        # 转码
+        silk: bytes = await silkcoder.encode(voice_raw)
+        voice = await app.uploadVoice(silk)
+        await app.sendGroupMessage(group, MessageChain.create([voice]))
