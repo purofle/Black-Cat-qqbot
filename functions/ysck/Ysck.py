@@ -20,7 +20,7 @@ class Ysck:
         async with aiohttp.request("GET", self.__baseurl) as r:
             __r = await r.json()
         if __r["retcode"] == -101:
-            raise (RuntimeError(__r))
+            raise RuntimeError(__r)
         return __r["data"]["size"]
 
     async def request(self, gacha_type: int) -> dict:
