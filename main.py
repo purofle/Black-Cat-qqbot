@@ -7,6 +7,7 @@ from graia.saya.builtins.broadcast import BroadcastBehaviour
 
 from graia.application import GraiaMiraiApplication, Session
 from graia.broadcast import Broadcast
+import sys
 
 from utils.utils import get_all_package_name
 
@@ -35,4 +36,4 @@ with saya.module_context():
 try:
     app.launch_blocking()
 except KeyboardInterrupt:
-    exit()
+    sys.exit()
