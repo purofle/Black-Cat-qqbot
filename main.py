@@ -17,8 +17,6 @@ saya = Saya(bcc)
 
 saya.install_behaviours(BroadcastBehaviour(bcc))
 
-oop = asyncio.get_event_loop()
-
 app = GraiaMiraiApplication(
     broadcast=bcc,
     connect_info=Session(
