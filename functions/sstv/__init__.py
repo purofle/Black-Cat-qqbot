@@ -45,4 +45,3 @@ async def coolapk(
         return
     image: Image = message.get(Image)[0]
     image = img.open(BytesIO(await image.http_to_bytes()))
-    
