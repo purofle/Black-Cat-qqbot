@@ -12,9 +12,7 @@
 ```bash
 git clone https://github.com/purofle/Black-Cat-qqbot.git
 cd Black-Cat-qqbot
-cp config.yaml.sample config.yaml
-# 修改你的config.yaml,配置key
-# 修改apps/__init__.py,配置host,qq,websocket,authKey
+# 修改main.py,配置host,qq,websocket,authKey
 ./main.py
 ```
 
