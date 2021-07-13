@@ -12,13 +12,23 @@
 ```bash
 git clone https://github.com/purofle/Black-Cat-qqbot.git
 cd Black-Cat-qqbot
-# 修改main.py,配置host,qq,websocket,authKey
+# 修改 main.py 23行至25行 ,配置 host,qq,websocket,authKey
+# 如果需要用到`functions/translation`中的翻译功能,请修改`functions/translation/config.py`中的翻译配置
+# 如果需要用到`functions/voice`中的语音功能，请修改`functions/voice/config.py`中的语音配置
 ./main.py
 ```
 
+## 文件说明
+`functions`文件夹内为各种模块，在 graia 启动时会被自动加载。
+- `functions/coolapk`: 向群内发送今日的酷安酷图。
+- `functions/res`: 资源文件夹，大多为图片。
+- `functions/translation`: 翻译模块。
+- `functions/voice`: 语音模块。
+
 ## 感谢
-- [ZCKun/CoolapkTokenCrack](https://github.com/ZCKun/CoolapkTokenCrack)提供的 X-App-Token 算法 
+- [ZCKun/CoolapkTokenCrack](https://github.com/ZCKun/CoolapkTokenCrack)提供的 X-App-Token 算法
 - [mamoe/mirai](https://github.com/mamoe/mirai)提供的QQ协议
 - [GreyElaina/Application](https://github.com/GreyElaina/Application)提供的框架
+
 ## 许可证
 [GPLv3](LICENSE)
