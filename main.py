@@ -1,13 +1,12 @@
 #!/usr/bin/env python3
 
 import asyncio
-
-from graia.saya import Saya
-from graia.saya.builtins.broadcast import BroadcastBehaviour
+import sys
 
 from graia.application import GraiaMiraiApplication, Session
 from graia.broadcast import Broadcast
-import sys
+from graia.saya import Saya
+from graia.saya.builtins.broadcast import BroadcastBehaviour
 
 from utils.utils import get_all_package_name
 
@@ -29,9 +28,9 @@ app = GraiaMiraiApplication(
 
 with saya.module_context():
     for i in get_all_package_name("functions/"):
-        saya.require("functions.{}".format(i))
-
+        saya.require(f"functions/{i}")
 try:
     app.launch_blocking()
 except KeyboardInterrupt:
+    print("正在退出...")
     sys.exit()

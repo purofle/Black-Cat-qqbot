@@ -1,3 +1,4 @@
+from functions.translation.fanyi import Fanyi
 from graia.application import GraiaMiraiApplication
 from graia.application.entry import GroupMessage
 from graia.application.group import Group, Member
@@ -5,9 +6,8 @@ from graia.application.message.chain import MessageChain
 from graia.application.message.elements.internal import At, Image, Plain
 from graia.saya import Channel, Saya
 from graia.saya.builtins.broadcast.schema import ListenerSchema
-from functions.translation.fanyi import Fanyi
-from .config import appid, authKey
 
+from .config import appid, authKey
 
 saya = Saya.current()
 channel = Channel.current()

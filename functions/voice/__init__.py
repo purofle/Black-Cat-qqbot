@@ -1,4 +1,5 @@
 import json
+from pathlib import Path
 
 from graia.application import GraiaMiraiApplication
 from graia.application.entry import GroupMessage
@@ -8,7 +9,6 @@ from graia.application.message.elements.internal import At, Plain
 from graia.saya import Saya
 from graia.saya.builtins.broadcast.behaviour import ListenerSchema
 from graia.saya.channel import Channel
-from pathlib import Path
 from graiax import silkcoder
 
 from .api import AzureAPI
