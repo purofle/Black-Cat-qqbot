@@ -5,13 +5,8 @@ from graia.application.message.chain import MessageChain
 from graia.application.message.elements.internal import At, Image, Plain
 from graia.saya import Channel, Saya
 from graia.saya.builtins.broadcast.schema import ListenerSchema
-from graia.saya.event import SayaModuleInstalled
-
-from functions.keys.key import read
 from functions.translation.fanyi import Fanyi
-
-appid = read("config.yaml")["fanyi"]["appid"]
-authKey = read("config.yaml")["fanyi"]["authKey"]
+from .config import appid, authKey
 
 
 saya = Saya.current()

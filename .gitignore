@@ -142,4 +142,4 @@ music/
 test.*
 voice.*
 
-functions/voice/config.py
+functions/**/config.py
