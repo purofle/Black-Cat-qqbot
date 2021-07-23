@@ -50,7 +50,7 @@ async def coolapk(app: GraiaMiraiApplication, group: Group, member: Member):
 
     msg = [
         At(member.id),
-        Plain(" 用户名：{}\n使用设备：{}".format(username, device)),
+        Plain(" 用户名：{}\n使用设备：{}\n标签：{}".format(username, device, tag)),
         Image.fromNetworkAddress(url),
     ]
     await app.sendGroupMessage(group, MessageChain.create(msg))

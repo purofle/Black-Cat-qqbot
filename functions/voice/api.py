@@ -14,10 +14,10 @@ class AzureAPI:
             ),
             headers={"Ocp-Apim-Subscription-Key": self.__key},
         ) as r:
+
             return await r.json()
 
     async def get_speech(self, text: str, speaker: str):
-        print("获取中")
         """
         text: 要转换的文本
         speaker: 发音人
@@ -26,17 +26,17 @@ class AzureAPI:
         headers = {
             "Ocp-Apim-Subscription-Key": self.__key,
             "Content-Type": "application/ssml+xml",
-            "X-Microsoft-OutputFormat": "audio-16khz-128kbitrate-mono-mp3",
+            "X-Microsoft-OutputFormat": "audio-48khz-96kbitrate-mono-mp3",
             "User-Agent": "curl",
         }
 
-        data_raw = "<speak version='\''1.0'\'' xml:lang='\''en-US'\''><voice xml:lang='\''en-US'\'' xml:gender='\''Female'\'' name='\''{}'\''>{}</voice></speak>".format(speaker, text)
+        data_raw = """<speak version='1.0' xml:lang='en-US'><voice xml:lang='en-US' xml:gender='Female' name='{}'>{}</voice></speak>""".format(
+            speaker, text
+        )
+
         url = "https://{}.tts.speech.microsoft.com/cognitiveservices/v1".format(
             self.__location
         )
-        print(self.__key, "key", self.__location)
         async with aiohttp.request("POST", url, data=data_raw, headers=headers) as r:
             n = await r.read()
-            print(headers)
-            print(r.status)
             return n
