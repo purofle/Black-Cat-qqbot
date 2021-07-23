@@ -82,3 +82,12 @@ async def voice(
         silk: bytes = await silkcoder.encode(voice_raw)
         voice_m = await app.uploadVoice(silk)
         await app.sendGroupMessage(group, MessageChain.create([voice_m]))
+
+
+@channel.use(ListenerSchema([GroupMessage]))
+async def updateList(
+    app: GraiaMiraiApplication, group: Group, message: MessageChain, member: Member
+):
+    if message.asDisplay() == "更新列表" and member.id == 3272912942:
+        print(await azure.get_voice_list())
+        await app.sendGroupMessage(group, MessageChain.create([Plain("已发送至后台")]))
