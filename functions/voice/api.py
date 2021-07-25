@@ -38,5 +38,6 @@ class AzureAPI:
             self.__location
         )
         async with aiohttp.request("POST", url, data=data_raw, headers=headers) as r:
+            r.raise_for_status()
             n = await r.read()
             return n
