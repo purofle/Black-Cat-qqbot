@@ -1,3 +1,5 @@
 graia-application-mirai==0.19.2
 graia-saya
 graiax-silkcoder
+graia-schedule
+pyyaml

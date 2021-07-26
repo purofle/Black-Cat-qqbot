@@ -24,7 +24,6 @@ if not config_path.is_file():
 config = yaml.load(config_path.read_text(), Loader=SafeLoader)
 
 saya.install_behaviours(BroadcastBehaviour(bcc))
-print(config)
 app = GraiaMiraiApplication(
     broadcast=bcc,
     connect_info=Session(
@@ -37,7 +36,7 @@ app = GraiaMiraiApplication(
 
 with saya.module_context():
     for i in get_all_package_name("functions/"):
-        saya.require("functions.{}".format(i))
+        saya.require("functions.{}".format(i), config)
 
 try:
     app.launch_blocking()

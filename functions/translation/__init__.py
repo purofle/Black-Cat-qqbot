@@ -7,10 +7,11 @@ from graia.saya import Channel, Saya
 from graia.saya.builtins.broadcast.schema import ListenerSchema
 
 from functions.translation.fanyi import Fanyi
-from .config import appid, authKey
 
 saya = Saya.current()
 channel = Channel.current()
+
+config = saya.current_env()["translation"]
 
 
 @channel.use(ListenerSchema(listening_events=[GroupMessage]))
@@ -34,7 +35,7 @@ async def tr(
             )
         else:
             msg_sp = msg.split(" ")
-            fanyi = Fanyi(msg_sp[1], msg_sp[2], appid, authKey)
+            fanyi = Fanyi(msg_sp[1], msg_sp[2], config["appid"], config["authKey"])
             lang_to = await fanyi.get()
             await app.sendGroupMessage(
                 group, MessageChain.create([At(member.id), Plain(" " + lang_to)])
