@@ -1,5 +1,9 @@
 mirai:
-    host: "http://127.0.0.1:8000"
+    host: "http://127.0.0.1:8080"
     authKey: "12345678"
     account: 3552600542
     websocket: True
+
+translation:
+    appid: "1616134944637"
+    authKey: "JABAJhssjshJSJDJ"
