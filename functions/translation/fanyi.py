@@ -39,7 +39,7 @@ class Fanyi:
             n = await r.json()
         try:
             n = n["trans_result"][0]["dst"]
-        except:
+        except KeyError:
             return "出现错误！源数据：\n" + str(n)
         else:
             return n
