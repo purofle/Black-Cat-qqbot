@@ -1,13 +1,15 @@
 #!/usr/bin/env python3
 
 import asyncio
+import sys
+from pathlib import Path
 
-from graia.saya import Saya
-from graia.saya.builtins.broadcast import BroadcastBehaviour
-
+import yaml
 from graia.application import GraiaMiraiApplication, Session
 from graia.broadcast import Broadcast
-import sys
+from graia.saya import Saya
+from graia.saya.builtins.broadcast import BroadcastBehaviour
+from yaml.loader import SafeLoader
 
 from utils.utils import get_all_package_name
 
@@ -15,15 +17,21 @@ loop = asyncio.get_event_loop()
 bcc = Broadcast(loop=loop)
 saya = Saya(bcc)
 
-saya.install_behaviours(BroadcastBehaviour(bcc))
+config_path = Path("config.yaml")
+if not config_path.is_file():
+    config_path.write_text(Path("config.yaml.sample").read_text())
+    sys.exit(1)
+config = yaml.load(config_path.read_text(), Loader=SafeLoader)
 
+saya.install_behaviours(BroadcastBehaviour(bcc))
+print(config)
 app = GraiaMiraiApplication(
     broadcast=bcc,
     connect_info=Session(
-        host="http://0.0.0.0:8080",
-        authKey="12345678",
-        account=3552600542,
-        websocket=True,
+        host=config["mirai"]["host"],
+        authKey=config["mirai"]["authKey"],
+        account=config["mirai"]["account"],
+        websocket=config["mirai"]["websocket"],
     ),
 )
 
