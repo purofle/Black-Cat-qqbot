@@ -74,8 +74,8 @@ async def voice(
         await app.sendGroupMessage(group, MessageChain.create([Plain("请稍后")]))
         text = "".join(sp_m[2:])
         # text为文本，sp_m[1]为发音人的名字
-        voice = read_c["speech"][sp_m[1]]
-        voice_raw = await azure.get_speech(text, voice)
+        informant = read_c["speech"][sp_m[1]]
+        voice_raw = await azure.get_speech(text, informant)
         # 转码
         silk: bytes = await silkcoder.encode(voice_raw)
         voice_m = await app.uploadVoice(silk)
