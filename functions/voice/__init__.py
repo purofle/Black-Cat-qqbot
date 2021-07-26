@@ -38,9 +38,7 @@ async def speech_list(
         await app.sendGroupMessage(
             group,
             MessageChain.create(
-                [At(member.id), Plain(" 发音人列表如下：{}".format(
-                    read_c["speech"]
-                    ))]
+                [At(member.id), Plain(" 发音人列表如下：{}".format(read_c["speech"]))]
             ),
         )
 

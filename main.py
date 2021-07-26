@@ -24,7 +24,7 @@ app = GraiaMiraiApplication(
         authKey="12345678",
         account=3552600542,
         websocket=True,
-    )
+    ),
 )
 
 with saya.module_context():
