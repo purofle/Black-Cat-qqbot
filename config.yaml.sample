@@ -7,3 +7,7 @@ mirai:
 translation:
   appid: "1616134944637"
   authKey: "JABAJhssjshJSJDJ"
+
+voice:
+  location: "southeastasia"
+  key: ""

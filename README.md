@@ -19,5 +19,6 @@ cd Black-Cat-qqbot
 ## 感谢
 - [ZCKun/CoolapkTokenCrack](https://github.com/ZCKun/CoolapkTokenCrack)提供的X-App-Token算法 
 - [mamoe/mirai](https://github.com/mamoe/mirai)提供的QQ协议
+- [GraiaProject/Application](https://github.com/GraiaProject/Application)提供的框架
 ## 许可证
 [GPLv3](LICENSE)
