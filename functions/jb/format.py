@@ -7,5 +7,5 @@ def format(group: Group, data: dict) -> str:
     # unpack
     result = []
     for i in data:
-        result.append(f"{i[0]}：共断了{i[1]}根jb")
+        result.append(f"{i[0].name}：共断了{i[1]}根jb")
     return '\n'.join(result)

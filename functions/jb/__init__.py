@@ -25,9 +25,9 @@ async def jba(
         ):
             if not jb.get(group.id):
                 jb[group.id] = {}
-            if not jb[group.id].get(member.id):
-                jb[group.id][member.id] = 0
-            jb[group.id][member.id] += 1
+            if not jb[group.id].get(member):
+                jb[group.id][member] = 0
+            jb[group.id][member] += 1
             await app.sendGroupMessage(
                 group, MessageChain.create([At(member.id), Plain(" 你的jb-1")])
             )
