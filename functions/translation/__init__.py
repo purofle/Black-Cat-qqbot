@@ -35,7 +35,7 @@ async def tr(
             )
         else:
             msg_sp = msg.split(" ")
-            fanyi = Fanyi(msg_sp[1], msg_sp[2], config["appid"], config["authKey"])
+            fanyi = Fanyi(" ".join(msg_sp[2:]), msg_sp[1], config["appid"], config["authKey"])
             lang_to = await fanyi.get()
             await app.sendGroupMessage(
                 group, MessageChain.create([At(member.id), Plain(" " + lang_to)])

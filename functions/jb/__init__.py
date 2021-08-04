@@ -23,11 +23,12 @@ async def jba(
             message.get(Image)[0].imageId
             == "{7F7177D2-D24A-93F5-32BA-C50CCFD02F70}.jpg"
         ):
+            name = "{}({})".format(member.name, member.id)
             if not jb.get(group.id):
                 jb[group.id] = {}
-            if not jb[group.id].get(member):
-                jb[group.id][member] = 0
-            jb[group.id][member] += 1
+            if not jb[group.id].get(name):
+                jb[group.id][name] = 0
+            jb[group.id][name] += 1
             await app.sendGroupMessage(
                 group, MessageChain.create([At(member.id), Plain(" 你的jb-1")])
             )
