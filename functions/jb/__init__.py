@@ -5,6 +5,7 @@ from graia.application.message.chain import MessageChain
 from graia.application.message.elements.internal import At, Image, Plain
 from graia.saya import Channel, Saya
 from graia.saya.builtins.broadcast.schema import ListenerSchema
+from .format import format
 
 saya = Saya.current()
 channel = Channel.current()
@@ -40,5 +41,7 @@ async def jbTop(
         if message.asDisplay() == "jb排行榜":
             await app.sendGroupMessage(
                 group,
-                MessageChain.create([Plain("jb排行榜：\n{}".format(str(jb[group.id])))]),
-            )
+                MessageChain.create([
+                    Plain("jb排行榜：\n{}".format(format(group, jb)))
+                    ])
+                )
