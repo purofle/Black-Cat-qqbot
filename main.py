@@ -11,10 +11,9 @@ from graia.saya import Saya
 from graia.saya.builtins.broadcast import BroadcastBehaviour
 from yaml.loader import SafeLoader
 
-from utils.utils import get_all_package_name, uncaught_error_handler
+from utils.utils import get_all_package_name
 
 loop = asyncio.get_event_loop()
-loop.set_exception_handler(uncaught_error_handler)
 bcc = Broadcast(loop=loop)
 saya = Saya(bcc)
 
