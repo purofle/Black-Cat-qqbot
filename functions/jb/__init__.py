@@ -39,11 +39,12 @@ async def jbK(
     app: GraiaMiraiApplication, group: Group, member: Member, message: MessageChain
 ):
     if (
-            message.has(At)[0] and message.get(Image)[0].imageId
+            message.has(At) and message.get(Image)[0].imageId
             == "{7F7177D2-D24A-93F5-32BA-C50CCFD02F70}.jpg"
         ):
-        at: At = message.get[At][0]
-        name = "{}({})".format(at.target, at.display)
+        at: At = message.get(At)[0]
+        memberAt = await app.getMember(group, at.target)
+        name = "{}({})".format(memberAt.name, at.target)
         if not jb.get(group.id):
             jb[group.id] = {}
         if not jb[group.id].get(name):
