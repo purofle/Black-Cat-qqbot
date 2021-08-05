@@ -33,6 +33,26 @@ async def jba(
                 group, MessageChain.create([At(member.id), Plain(" 你的jb-1")])
             )
 
+# 砍别人的jb
+@channel.use(ListenerSchema(listening_events=[GroupMessage]))
+async def jbK(
+    app: GraiaMiraiApplication, group: Group, member: Member, message: MessageChain
+):
+    if (
+            message.has(At)[0] and message.get(Image)[0].imageId
+            == "{7F7177D2-D24A-93F5-32BA-C50CCFD02F70}.jpg"
+        ):
+        at: At = message.get[At][0]
+        name = "{}({})".format(at.target, at.display)
+        if not jb.get(group.id):
+            jb[group.id] = {}
+        if not jb[group.id].get(name):
+            jb[group.id][name] = 0
+        jb[group.id][name] += 0.5
+        await app.sendGroupMessage(group, MessageChain.create([
+            At(member.id), Plain(f" 砍了下{name}的jb, {name}的jb-0.5")
+        ]))
+
 
 @channel.use(ListenerSchema(listening_events=[GroupMessage]))
 async def jbTop(
