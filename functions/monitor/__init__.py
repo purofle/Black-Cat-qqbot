@@ -12,7 +12,7 @@ import mcstatus
 saya = Saya.current()
 channel = Channel.current()
 config = saya.current_env()["monitor"]
-server = mcstatus.MinecraftBedrockServer(config.ip)
+server = mcstatus.MinecraftBedrockServer(config["ip"])
 
 @channel.use(ListenerSchema(listening_events=[GroupMessage]))
 async def monitor(
@@ -20,10 +20,15 @@ async def monitor(
     group: Group,
     member: Member,
     message: MessageChain):
-    if not group.id == config.group:
+    if not group.id == config["group"]:
         return
     if message.asDisplay() == "开始监控":
         saya.broadcast.loop.create_task(monitor_loop(app, group))
+        await app.sendGroupMessage(group, MessageChain.create([
+            At(member.id),
+            Plain(" 已开启")
+        ]))
+
     if message.asDisplay() == "在线人数":
         status = await server.async_status()
         await app.sendGroupMessage(group, MessageChain.create([
@@ -35,12 +40,12 @@ async def monitor_loop(
     app: GraiaMiraiApplication,
     group: Group):
     while True:
-        asyncio.sleep(config.interval)
+        await asyncio.sleep(config["interval"])
         try:
             await server.async_status()
-        except mcstatus.ConnectionError:
+        except BaseException:
             await app.sendGroupMessage(group, MessageChain.create([
-                At(config.managerId),
+                At(config["managerId"]),
                 Plain(" 服务器连接失败!")
             ]))
             return
