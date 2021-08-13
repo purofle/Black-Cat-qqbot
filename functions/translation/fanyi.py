@@ -38,8 +38,6 @@ class Fanyi:
         async with aiohttp.request("GET", self.__url) as r:
             n = await r.json()
         try:
-            print("!!!!n:", n)
-            print("!!!!q:", self.__q)
             n = n["trans_result"][0]["dst"]
         except KeyError:
             return "出现错误！源数据：\n" + str(n)
