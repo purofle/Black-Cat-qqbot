@@ -14,7 +14,7 @@ channel = Channel.current()
 config = saya.current_env()["genshin"]
 
 
-@channel.on_message(ListenerSchema([GroupMessage]))
+@channel.use(ListenerSchema(listening_events=[GroupMessage]))
 async def genshin(
     app: GraiaMiraiApplication, group: Group, message: MessageChain, member: Member
 ):
