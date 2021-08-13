@@ -1,5 +1,3 @@
-import json
-
 from graia.application import GraiaMiraiApplication
 from graia.application.entry import GroupMessage
 from graia.application.group import Group, Member
@@ -8,7 +6,6 @@ from graia.application.message.elements.internal import At, Plain
 from graia.saya import Saya
 from graia.saya.builtins.broadcast.behaviour import ListenerSchema
 from graia.saya.channel import Channel
-from pathlib import Path
 from graiax import silkcoder
 
 from .api import AzureAPI
@@ -39,9 +36,7 @@ async def speech_list(
 
         await app.sendGroupMessage(
             group,
-            MessageChain.create(
-                [At(member.id), Plain(" 发音人列表如下：{}".format(data))]
-            ),
+            MessageChain.create([At(member.id), Plain(" 发音人列表如下：{}".format(data))]),
         )
 
 

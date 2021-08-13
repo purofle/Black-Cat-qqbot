@@ -33,15 +33,17 @@ async def jba(
                 group, MessageChain.create([At(member.id), Plain(" 你的jb-1")])
             )
 
+
 # 砍别人的jb
 @channel.use(ListenerSchema(listening_events=[GroupMessage]))
 async def jbK(
     app: GraiaMiraiApplication, group: Group, member: Member, message: MessageChain
 ):
     if (
-            message.has(At) and message.get(Image)[0].imageId
-            == "{7F7177D2-D24A-93F5-32BA-C50CCFD02F70}.jpg"
-        ):
+        message.has(At)
+        and message.get(Image)[0].imageId
+        == "{7F7177D2-D24A-93F5-32BA-C50CCFD02F70}.jpg"
+    ):
         at: At = message.get(At)[0]
         memberAt = await app.getMember(group, at.target)
         name = "{}({})".format(memberAt.name, at.target)
@@ -50,9 +52,12 @@ async def jbK(
         if not jb[group.id].get(name):
             jb[group.id][name] = 0
         jb[group.id][name] += 0.5
-        await app.sendGroupMessage(group, MessageChain.create([
-            At(member.id), Plain(f" 砍了下{name}的jb, {name}的jb-0.5")
-        ]))
+        await app.sendGroupMessage(
+            group,
+            MessageChain.create(
+                [At(member.id), Plain(f" 砍了下{name}的jb, {name}的jb-0.5")]
+            ),
+        )
 
 
 @channel.use(ListenerSchema(listening_events=[GroupMessage]))
@@ -63,7 +68,5 @@ async def jbTop(
         if message.asDisplay() == "jb排行榜":
             await app.sendGroupMessage(
                 group,
-                MessageChain.create([
-                    Plain("jb排行榜：\n{}".format(format(group, jb)))
-                    ])
-                )
+                MessageChain.create([Plain("jb排行榜：\n{}".format(format(group, jb)))]),
+            )

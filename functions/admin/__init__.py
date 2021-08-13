@@ -13,25 +13,24 @@ import random
 saya = Saya.current()
 channel = Channel.current()
 
+
 @channel.use(
-        ListenerSchema(
-            listening_events=[GroupMessage],
-            inline_dispatchers=[Kanata([FullMatch("随机禁言")])]
-            )
-        )
-async def jy(
-    app: GraiaMiraiApplication,
-    group: Group,
-    member: Member):
-    randint = random.randint(1,60)
-    await app.sendGroupMessage(group, MessageChain.create([
-        At(member.id),
-        Plain(f" 恭喜{member.name}获得{randint}秒的禁言时间！")
-    ]))
+    ListenerSchema(
+        listening_events=[GroupMessage],
+        inline_dispatchers=[Kanata([FullMatch("随机禁言")])],
+    )
+)
+async def jy(app: GraiaMiraiApplication, group: Group, member: Member):
+    randint = random.randint(1, 60)
+    await app.sendGroupMessage(
+        group,
+        MessageChain.create(
+            [At(member.id), Plain(f" 恭喜{member.name}获得{randint}秒的禁言时间！")]
+        ),
+    )
     try:
         await app.mute(group, member, randint)
     except PermissionError:
-        await app.sendGroupMessage(group, MessageChain.create([
-            At(member.id),
-            Plain(" 没管理禁nm")
-            ]))
+        await app.sendGroupMessage(
+            group, MessageChain.create([At(member.id), Plain(" 没管理禁nm")])
+        )
