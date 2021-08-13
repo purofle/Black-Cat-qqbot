@@ -28,7 +28,7 @@ def get_DS() -> str:
 
 
 def get_headers(cookie: str):
-    headers = {
+    return {
         "Cookie": cookie,
         "User-Agent": "okhttp/4.8.0",
         "Referer": "https://app.mihoyo.com",
@@ -59,5 +59,9 @@ async def query(cookie: str, uid: str):
         server = "cn_qd01"
     url = f"https://api-takumi.mihoyo.com/game_record/genshin/api/index?server={server}&role_id={uid}"
     async with request("GET", url, headers=get_headers(cookie)) as resp:
-        avatars = (await resp.json())["data"]["avatars"]
-        return format(avatars)
+        avatars = await resp.json()
+        try:
+            n = format(avatars["data"]["avatars"])
+        except TypeError:
+            n = avatars
+        return n
