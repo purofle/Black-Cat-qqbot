@@ -51,8 +51,7 @@ def format(data: list) -> str:
         )
     _word_str = "世界探索度：\n"
     for i in data["world_explorations"]:
-        n = str(i["exploration_percentage"])
-        n = n[-2:] + "." + n[2] + "%"
+        n = str(i["exploration_percentage"]/10)+"%"
         _word_str += "{}探索度{}\n".format(i["name"], n)
     return _str + _word_str
 
@@ -65,15 +64,8 @@ async def query(cookie: str, uid: str):
     url = f"https://api-takumi.mihoyo.com/game_record/genshin/api/index?server={server}&role_id={uid}"
     async with request("GET", url, headers=get_headers(cookie)) as resp:
         avatars = await resp.json()
-        n = format(avatars["data"])
+        try:
+            n = format(avatars["data"])
+        except TypeError:
+            n = avatars
         return n
-
-
-print(
-    asyncio.run(
-        query(
-            "_gid=GA1.2.1472705651.1628852548; _MHYUUID=ca00182a-9236-44af-852c-32e2a0f9404e; UM_distinctid=17b3f2db54f64-0ad9a8d275b94e-3d740e5b-100200-17b3f2db5516a; CNZZDATA1275023096=1467006308-1628850557-|1628850557; ltoken=ibcKI1sAhHlKurdOpXtl0IjCKM3RNyobFEzumwBQ; ltuid=275401245; cookie_token=CplAB3DncDTTiQgonr8zRhIdmg129vjRxZJCp5jY; account_id=275401245; _ga_KJ6J9V9VZQ=GS1.1.1628853892.1.0.1628853898.0; _ga=GA1.2.1827177516.1628852548; _gat=1",
-            "501083500",
-        )
-    )
-)
