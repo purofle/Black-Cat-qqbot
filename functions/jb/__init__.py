@@ -17,8 +17,7 @@ jb = {}
 async def jba(
     app: GraiaMiraiApplication, group: Group, member: Member, message: MessageChain
 ):
-    if message.has(Image):
-        print(message.get(Image)[0].imageId)
+    if not message.has(Image):
         if (
             message.get(Image)[0].imageId
             == "{7F7177D2-D24A-93F5-32BA-C50CCFD02F70}.jpg"
@@ -39,7 +38,7 @@ async def jba(
 async def jbK(
     app: GraiaMiraiApplication, group: Group, member: Member, message: MessageChain
 ):
-    if not message.has(At):
+    if not message.has(At) and message.has(Image):
         return
     if message.get(Image)[0].imageId == "{7F7177D2-D24A-93F5-32BA-C50CCFD02F70}.jpg":
         at = message.get(At)[0]

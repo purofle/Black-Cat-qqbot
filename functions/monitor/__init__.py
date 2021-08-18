@@ -22,13 +22,14 @@ async def monitor(
     if not group.id == config["group"]:
         return
     if message.asDisplay() == "开始监控":
-        saya.broadcast.loop.create_task(monitor_loop(app, group))
+        saya.broadcast.loop.create_task(monitor_loop(app, group), name="monitor")
         await app.sendGroupMessage(
             group, MessageChain.create([At(member.id), Plain(" 已开启")])
         )
 
     if message.asDisplay() == "在线人数":
         status = await server.async_status()
+        print(asyncio.current_task(loop=saya.broadcast.loop))
         await app.sendGroupMessage(
             group,
             MessageChain.create(
@@ -45,6 +46,6 @@ async def monitor_loop(app: GraiaMiraiApplication, group: Group):
         except BaseException:
             await app.sendGroupMessage(
                 group,
-                MessageChain.create([At(config["managerId"]), Plain(" 服务器连接失败!")]),
+                MessageChain.create([Plain(" 服务器连接失败!")]),
             )
             return

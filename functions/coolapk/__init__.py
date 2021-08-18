@@ -2,7 +2,6 @@ import random
 
 from graia.application import GraiaMiraiApplication
 from graia.application.entry import GroupMessage
-from graia.application.event.mirai import NudgeEvent
 from graia.application.group import Group, Member
 from graia.application.message.chain import MessageChain
 from graia.application.message.elements.internal import At, Image, Plain
@@ -28,7 +27,7 @@ channel.description(f"{__description__}\n使用方法：{__usage__}")
 
 @channel.use(
     ListenerSchema(
-        listening_events=[GroupMessage, NudgeEvent],
+        listening_events=[GroupMessage],
         inline_dispatchers=[Kanata([FullMatch("酷安酷图")])],
     )
 )
