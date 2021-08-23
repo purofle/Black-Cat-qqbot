@@ -1,5 +1,11 @@
+graia-broadcast==0.8.11
 graia-application-mirai==0.19.2
-graia-saya
-graiax-silkcoder
-graia-schedule
+graia-saya==0.0.9
+graiax-silkcoder==0.0.12
+graia-scheduler==0.0.4
 pyyaml
+numpy
+moviepy
+aiohttp
+Pillow
+mcstatus
