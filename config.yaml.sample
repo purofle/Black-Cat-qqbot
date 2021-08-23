@@ -11,3 +11,12 @@ translation:
 voice:
   location: "southeastasia"
   key: ""
+
+monitor:
+  group: 114514
+  ip: "baidu.com"
+  interval: 2
+  managerId: 114514
+
+genshin:
+  cookie: "xxx"
