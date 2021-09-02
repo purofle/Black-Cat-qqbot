@@ -8,6 +8,7 @@
 一个简单的QQ机器人。
 </div>
 ## 注意
+
 Black-cat-qqbot因不可抗力停更。  
 ![](https://mirai.mamoe.net/assets/uploads/files/1630559926431-39e5f8ad7c81aad7.jpg)  
 ## 使用 
