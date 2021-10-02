@@ -6,25 +6,21 @@ import time
 import uuid
 import hashlib
 
-
-def random_string(len: int) -> str:
-    return "".join(
-        [random.choice(string.ascii_letters + string.digits) for n in range(len)]
-    )
-
-
-def hexdigest(text: str) -> str:
-    md5 = hashlib.md5()
-    md5.update(text.encode("utf-8"))
-    return md5.hexdigest()
-
-
-def get_DS() -> str:
-    md5string = "dmq2p7ka6nsu0d3ev6nex4k1ndzrnfiy"
-    i = int(time.time())
-    r = random_string(6)
-    c = hexdigest(f"salt={md5string}&t={i}&r={r}")
-    return f"{i},{r},{c}"
+def get_ds(query: str = None, body: dict = None): # Github-Womsxd/YuanShen_User_Info
+    salt = "xV8v4Qu54lUKrEYFZkJhB8cuOh9Asafs"  # Github-@lulu666lulu
+    n = salt
+    i = str(int(time.time()))
+    r = str(random.randint(100000, 200000))
+    if body:
+        b = json.dumps(body)
+    else:
+        b = ""
+    if query:
+        q = query
+    else:
+        q = ""
+    c = md5("salt=" + n + "&t=" + i + "&r=" + r + "&b=" + b + "&q=" + q)
+    return i + "," + r + "," + c
 
 
 def get_headers(cookie: str):
@@ -39,7 +35,7 @@ def get_headers(cookie: str):
         .upper(),
         "x-rpc-client_type": "2",
         "x-rpc-app_version": "2.8.0",
-        "DS": get_DS(),
+        "DS": get_ds(),
     }
 
 
