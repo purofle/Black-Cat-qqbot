@@ -9,7 +9,7 @@
 </div>
 
 ## 注意
-Black-cat-qqbot因不可抗力停更。  
+Black-cat-qqbot因不可抗力停更，暑假期间**可能**会更新。
 ![](https://mirai.mamoe.net/assets/uploads/files/1630559926431-39e5f8ad7c81aad7.jpg)  
 ## 使用 
 ```bash
